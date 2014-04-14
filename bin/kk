@@ -37,4 +37,5 @@ pid=$(echo $p|awk '{print $1}')
 if [ "$pid" = "" ];then
   exit
 fi
+echo kill: $p
 kill -kill $pid
