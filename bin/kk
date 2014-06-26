@@ -31,11 +31,21 @@ echo "Install sentaku (https://github.com/rcmdnk/sentaku) first."
   exit 1
 fi
 
-# get user's process
-p=$(ps -u$USER -o pid,command|sentaku -s $'\n')
-pid=$(echo $p|awk '{print $1}')
-if [ "$pid" = "" ];then
-  exit
-fi
-echo kill: $p
-kill -kill $pid
+. sentaku -n
+
+_SENTAKU_SEPARATOR=$'\n'
+
+_sf_execute () { # {{{
+  :
+} # }}}
+
+_sf_select () { # {{{
+  kill -kill $(echo ${_s_inputs[$_s_current_n]}|awk '{print $1}')
+  _sf_remove
+} # }}}
+
+_sf_d () {
+  _sf_remove
+}
+
+ps -u$USER -o pid,command|grep -v "ps -u$USER -o pid,command"|grep -v kk|grep -v sentaku|_sf_main
