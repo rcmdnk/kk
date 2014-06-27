@@ -48,4 +48,4 @@ _sf_d () {
   _sf_remove
 }
 
-ps -u$USER -o pid,command|grep -v "ps -u$USER -o pid,command"|grep -v kk|grep -v sentaku|_sf_main
+ps -u$USER -o pid,command|grep -v "PID COMMAND"|grep -v "ps -u$USER -o pid,command"|grep -v kk|grep -v sentaku|_sf_main
