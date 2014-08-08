@@ -41,11 +41,11 @@ _sf_execute () { # {{{
 
 _sf_select () { # {{{
   kill -kill $(echo ${_s_inputs[$_s_current_n]}|awk '{print $1}')
-  _sf_remove
+  _sf_rm_del
 } # }}}
 
 _sf_d () {
-  _sf_remove
+  _sf_rm_del
 }
 
 ps -u$USER -o pid,command|grep -v "PID COMMAND"|grep -v "ps -u$USER -o pid,command"|grep -v kk|grep -v sentaku|_sf_main
