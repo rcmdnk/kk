@@ -40,7 +40,12 @@ _sf_execute () { # {{{
 } # }}}
 
 _sf_select () { # {{{
-  kill -kill $(echo ${_s_inputs[$_s_current_n]}|awk '{print $1}')
+  _sf_set_maxmin
+  for ((i=0; i<$_s_n; i++));do
+    if ((i<_s_select_min || i>_s_select_max));then
+      kill -kill $(echo ${_s_inputs[$i]}|awk '{print $1}')
+    fi
+  done
   _sf_rm_del
 } # }}}
 
