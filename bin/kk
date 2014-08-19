@@ -41,7 +41,6 @@ _sf_execute () { # {{{
 
 _sf_select () { # {{{
   _sf_set_maxmin
-  _sf_echo $_s_select_min $_s_select_max
   for ((i=0; i<$_s_n; i++));do
     if ((i>=_s_select_min && i<=_s_select_max));then
       kill -kill $(echo ${_s_inputs[$i]}|awk '{print $1}')
