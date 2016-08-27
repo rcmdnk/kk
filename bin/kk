@@ -40,12 +40,22 @@ _sf_execute () { # {{{
 } # }}}
 
 _sf_select () { # {{{
-  _sf_set_maxmin
-  for ((i=0; i<_s_n; i++));do
-    if ((i>=_s_select_min && i<=_s_select_max));then
-      kill -kill "$(echo "${_s_inputs[$i]}"|awk '{print $1}')"
-    fi
-  done
+  if [ $_s_visual -ne -1 ];then
+    local is_first=1
+    local i
+    for i in $(seq 0 $((_s_n-1)));do
+      if [ ${_s_v_selected[$i]} -eq 1 ];then
+        if [ $is_first -eq 1 ];then
+          kill -kill "$(echo "${_s_inputs[$i]}"|awk '{print $1}')"
+          is_first=0
+        else
+          kill -kill "$(echo "${_s_inputs[$i]}"|awk '{print $1}')"
+        fi
+      fi
+    done
+  else
+    kill -kill "$(echo "${_s_inputs[$_s_current_n]}"|awk '{print $1}')"
+  fi
   _sf_rm_del
 } # }}}
 
